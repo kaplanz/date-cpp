@@ -16,44 +16,37 @@ class Date {
     friend class Formatter;
 
     private:
-        // Date and time
-        int year;
-        short month;
-        short day;
-        short hour;
-        short minute;
-        short second;
-
-        // Epoch seconds
-        long epochSeconds;
-
-        // Time zone
-        short tz = 0;
-        bool DST = false;
-
-        // Date format
-        std::string format;
-
-        // Function members
-        void updateMembers();
+        // Data members
+        long epochSeconds; // epoch time in seconds
+        char tz; // DST and time zone info
 
     public:
         // Constructors
         Date();
+        Date(Date &date);
         Date(long epochSeconds);
 
         // Destructor
         ~Date();
 
         // Accessors
-        long getEpoch() const;
-        std::string getFormat() const;
+        long epoch() const;
+        int timezone() const;
+        bool DST() const;
+        int year() const;
+        int month() const;
+        int day() const;
+        int hour() const;
+        int minute() const;
+        int second() const;
 
         // Mutators
-        void setEpoch(long epochSeconds);
-        void setFormat(std::string format);
+        long epoch(const long epochSeconds);
+        int timezone(const int tz);
+        bool DST(const bool DST);
 
         // Operators
+        Date &operator=(const Date &rhs);
         bool operator<(const Date &rhs) const;
         bool operator<=(const Date &rhs) const;
         bool operator==(const Date &rhs) const;

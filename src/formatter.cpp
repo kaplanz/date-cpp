@@ -34,7 +34,7 @@ string specifiers[] = {
 // Format a Date object by a string specifier
 string Formatter::format(const Date &date) {
     // Extract format string specifier
-    string repl = "h:mm:ss tt, dd-MM-yyyy"; // date.format;
+    string repl = "H:mm:ss dd/MM/yyyy"; // date.format;
 
     for (auto &s: specifiers) {
         repl = std::regex_replace(
@@ -90,7 +90,7 @@ string Formatter::substitute(const Date &date, string format) {
 
 // Formatting
 string Formatter::day(const Date &date, string format) {
-    int day = date.day;
+    int day = date.day();
 
     // Return formatted day string
     if (format == "d") {
@@ -111,7 +111,7 @@ string Formatter::day(const Date &date, string format) {
 
 
 string Formatter::month(const Date &date, string format) {
-    int month = date.month;
+    int month = date.month();
 
     // Return formatted month string
     if (format == "M") {
@@ -132,7 +132,7 @@ string Formatter::month(const Date &date, string format) {
 
 
 string Formatter::year(const Date &date, string format) {
-    int year = date.year;
+    int year = date.year();
 
     // Return formatted year string
     if (format == "y") {
@@ -157,7 +157,7 @@ string Formatter::year(const Date &date, string format) {
 
 
 string Formatter::century(const Date &date, string format) {
-    int century = date.year / 100;
+    int century = date.year() / 100;
 
     // Return formatted century string
     if (format == "c") {
@@ -174,7 +174,7 @@ string Formatter::century(const Date &date, string format) {
 
 
 string Formatter::hour(const Date &date, string format) {
-    int hour24 = date.hour;
+    int hour24 = date.hour();
     int hour12 = (hour24) ? hour24 % 12 : 12;
 
     // Return formatted hour string
@@ -198,7 +198,7 @@ string Formatter::hour(const Date &date, string format) {
 
 
 string Formatter::minute(const Date &date, string format) {
-    int minute = date.minute;
+    int minute = date.minute();
 
     // Return formatted minute string
     if (format == "m") {
@@ -215,7 +215,7 @@ string Formatter::minute(const Date &date, string format) {
 
 
 string Formatter::second(const Date &date, string format) {
-    int second = date.second;
+    int second = date.second();
 
     // Return formatted second string
     if (format == "s") {
@@ -232,7 +232,7 @@ string Formatter::second(const Date &date, string format) {
 
 
 string Formatter::period(const Date &date, string format) {
-    string period = (date.hour < 12) ? "am" : "pm";
+    string period = (date.hour() < 12) ? "am" : "pm";
 
     // Return formatted period string
     if (format == "t") {
@@ -255,7 +255,7 @@ string Formatter::period(const Date &date, string format) {
 
 
 string Formatter::tz(const Date &date, string format) {
-    int tz = date.tz;
+    int tz = date.timezone();
 
     // Return formatted tz string
     if (format == "z") {

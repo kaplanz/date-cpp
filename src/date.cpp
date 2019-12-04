@@ -10,6 +10,7 @@
 #include <string>
 
 #include "date.h"
+#include "formatter.h"
 
 
 // -- Globals --
@@ -19,10 +20,6 @@ enum Month {
 };
 
 // Arrays
-const std::string monthName[] = {
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-};
 const short monthDuration[] = {
     31, 28, 31, 30, 31, 30, // Jan - Jun
     31, 31, 30, 31, 30, 31  // Jul - Dec
@@ -127,10 +124,6 @@ bool Date::operator>(const Date &rhs) const {
 
 // Overload for operator<<
 std::ostream &operator<<(std::ostream &lhs, Date &rhs) {
-    return lhs << rhs.day << " "
-        << monthName[rhs.month-1] << " "
-        << rhs.year << ", "
-        << rhs.hour << ":"
-        << rhs.minute << ":"
-        << rhs.second;
+    // Redirect formatted date string to ostream, and return ostream
+    return lhs << Formatter::format(rhs);
 }

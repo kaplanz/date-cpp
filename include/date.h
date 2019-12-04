@@ -13,6 +13,8 @@
 
 
 class Date {
+    friend class Formatter;
+
     private:
         // Date and time
         int year;

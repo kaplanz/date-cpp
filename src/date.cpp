@@ -38,6 +38,7 @@ void Date::updateMembers() {
     this->minute = epochDate % 60;
     epochDate /= 60;
 
+    epochDate += this->tz; // Add time zone offset
     this->hour = epochDate % 24;
     epochDate /= 24;
 

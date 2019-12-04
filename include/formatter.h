@@ -46,6 +46,9 @@ using std::string;
 
 class Formatter {
     private:
+        // Helper methods
+        static string substitute(const Date &date, string format);
+
         // Date formatting
         static string day(const Date &date, string format);
         static string month(const Date &date, string format);

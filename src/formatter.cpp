@@ -7,6 +7,7 @@
 //
 
 #include <cstdio>
+#include <regex>
 #include <string>
 using std::string;
 
@@ -23,18 +24,69 @@ const std::string monthName[] = {
     "July", "August", "September", "October", "November", "December"
 };
 string specifiers[] = {
-    "d", "dd", "M", "MM", "MMM", "MMMM", "y", "yy", "yyyy", "c", "cc",
-    "h", "hh", "H", "HH", "m", "mm", "s", "ss", "t", "tt", "T", "TT", "z", "zz"
+    "dd", "d", "MMMM", "MMM", "MM", "M", "yyyy", "yyy", "yy", "y", "cc", "c",
+    "hh", "h", "HH", "H", "mm", "m", "ss", "s", "tt", "t", "TT", "T", "zz", "z"
 };
 
 
 // -- Public Methods --
 
 // Format a Date object by a string specifier
-string Formatter::format(const Date &date) { return {}; }
+string Formatter::format(const Date &date) {
+    // Extract format string specifier
+    string repl = "h:mm:ss tt, dd-MM-yyyy"; // date.format;
+
+    for (auto &s: specifiers) {
+        repl = std::regex_replace(
+                repl,
+                std::regex(s),
+                Formatter::substitute(date, s)
+        );
+    }
+
+    return repl;
+}
 
 
 // -- Private Methods --
+
+// Perform appropriate format substitution
+string Formatter::substitute(const Date &date, string format) {
+    switch (format[0]) {
+        case 'd':
+            return Formatter::day(date, format);
+
+        case 'M':
+            return Formatter::month(date, format);
+
+        case 'y':
+            return Formatter::year(date, format);
+
+        case 'c':
+            return Formatter::century(date, format);
+
+        case 'h':
+        case 'H':
+            return Formatter::hour(date, format);
+
+        case 'm':
+            return Formatter::minute(date, format);
+
+        case 's':
+            return Formatter::second(date, format);
+
+        case 't':
+        case 'T':
+            return Formatter::period(date, format);
+
+        case 'z':
+            return Formatter::tz(date, format);
+
+        default:
+            return format;
+    }
+}
+
 
 // Formatting
 string Formatter::day(const Date &date, string format) {
@@ -54,7 +106,7 @@ string Formatter::day(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -75,7 +127,7 @@ string Formatter::month(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -100,7 +152,7 @@ string Formatter::year(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -117,7 +169,7 @@ string Formatter::century(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -141,7 +193,7 @@ string Formatter::hour(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -158,7 +210,7 @@ string Formatter::minute(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -166,16 +218,16 @@ string Formatter::second(const Date &date, string format) {
     int second = date.second;
 
     // Return formatted second string
-    if (format == "m") {
+    if (format == "s") {
         return std::to_string(second);
-    } else if (format == "mm") {
+    } else if (format == "ss") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", second);
         return string(buffer);
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -198,7 +250,7 @@ string Formatter::period(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }
 
 
@@ -217,5 +269,5 @@ string Formatter::tz(const Date &date, string format) {
     }
 
     // Return empty string for invalid format
-    return string();
+    return format;
 }

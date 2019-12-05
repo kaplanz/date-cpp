@@ -1,6 +1,6 @@
 //
 //  formatter.h
-//  Date string formatter header file.
+//  Date to string formatter header file.
 //
 //  Created by Zakhary Kaplan on 2019-12-03.
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -9,7 +9,6 @@
 #pragma once
 
 #include <string>
-using std::string;
 
 #include "date.h"
 
@@ -47,20 +46,20 @@ using std::string;
 class Formatter {
     private:
         // Helper methods
-        static string substitute(const Date &date, string format);
+        static std::string substitute(const Date &date, std::string format);
 
         // Date formatting
-        static string day(const Date &date, string format);
-        static string month(const Date &date, string format);
-        static string year(const Date &date, string format);
-        static string century(const Date &date, string format);
+        static std::string day(const Date &date, std::string format);
+        static std::string month(const Date &date, std::string format);
+        static std::string year(const Date &date, std::string format);
+        static std::string century(const Date &date, std::string format);
         // Time formatting
-        static string hour(const Date &date, string format);
-        static string minute(const Date &date, string format);
-        static string second(const Date &date, string format);
-        static string period(const Date &date, string format);
-        static string tz(const Date &date, string format);
+        static std::string hour(const Date &date, std::string format);
+        static std::string minute(const Date &date, std::string format);
+        static std::string second(const Date &date, std::string format);
+        static std::string period(const Date &date, std::string format);
+        static std::string timezone(const Date &date, std::string format);
 
     public:
-        static string format(const Date &date);
+        static std::string format(const Date &date);
 };

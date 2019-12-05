@@ -1,6 +1,6 @@
 //
 //  formatter.cpp
-//  Date string formatter.
+//  Date to string formatter.
 //
 //  Created by Zakhary Kaplan on 2019-12-03.
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -9,7 +9,6 @@
 #include <cstdio>
 #include <regex>
 #include <string>
-using std::string;
 
 #include "date.h"
 #include "formatter.h"
@@ -23,7 +22,7 @@ const std::string monthName[] = {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 };
-string specifiers[] = {
+std::string specifiers[] = {
     "dd", "d", "MMMM", "MMM", "MM", "M", "yyyy", "yyy", "yy", "y", "cc", "c",
     "hh", "h", "HH", "H", "mm", "m", "ss", "s", "tt", "t", "TT", "T", "zz", "z"
 };
@@ -32,9 +31,9 @@ string specifiers[] = {
 // -- Public Methods --
 
 // Format a Date object by a string specifier
-string Formatter::format(const Date &date) {
+std::string Formatter::format(const Date &date) {
     // Extract format string specifier
-    string repl = "H:mm:ss dd/MM/yyyy"; // date.format;
+    std::string repl = "H:mm:ss dd/MM/yyyy"; // date.format;
 
     for (auto &s: specifiers) {
         repl = std::regex_replace(
@@ -51,7 +50,7 @@ string Formatter::format(const Date &date) {
 // -- Private Methods --
 
 // Perform appropriate format substitution
-string Formatter::substitute(const Date &date, string format) {
+std::string Formatter::substitute(const Date &date, std::string format) {
     switch (format[0]) {
         case 'd':
             return Formatter::day(date, format);
@@ -80,7 +79,7 @@ string Formatter::substitute(const Date &date, string format) {
             return Formatter::period(date, format);
 
         case 'z':
-            return Formatter::tz(date, format);
+            return Formatter::timezone(date, format);
 
         default:
             return format;
@@ -89,7 +88,7 @@ string Formatter::substitute(const Date &date, string format) {
 
 
 // Formatting
-string Formatter::day(const Date &date, string format) {
+std::string Formatter::day(const Date &date, std::string format) {
     int day = date.day();
 
     // Return formatted day string
@@ -98,11 +97,11 @@ string Formatter::day(const Date &date, string format) {
     } else if (format == "dd") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", day);
-        return string(buffer);
+        return std::string(buffer);
     } else if (format == "ddd") {
-        return string(dayName[day-1], 0, 3);
+        return std::string(dayName[day-1], 0, 3);
     } else if (format == "dddd") {
-        return string(dayName[day-1]);
+        return std::string(dayName[day-1]);
     }
 
     // Return empty string for invalid format
@@ -110,7 +109,7 @@ string Formatter::day(const Date &date, string format) {
 }
 
 
-string Formatter::month(const Date &date, string format) {
+std::string Formatter::month(const Date &date, std::string format) {
     int month = date.month();
 
     // Return formatted month string
@@ -119,11 +118,11 @@ string Formatter::month(const Date &date, string format) {
     } else if (format == "MM") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", month);
-        return string(buffer);
+        return std::string(buffer);
     } else if (format == "MMM") {
-        return string(monthName[month-1], 0, 3);
+        return std::string(monthName[month-1], 0, 3);
     } else if (format == "MMMM") {
-        return string(monthName[month-1]);
+        return std::string(monthName[month-1]);
     }
 
     // Return empty string for invalid format
@@ -131,7 +130,7 @@ string Formatter::month(const Date &date, string format) {
 }
 
 
-string Formatter::year(const Date &date, string format) {
+std::string Formatter::year(const Date &date, std::string format) {
     int year = date.year();
 
     // Return formatted year string
@@ -140,15 +139,15 @@ string Formatter::year(const Date &date, string format) {
     } else if (format == "yy") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", year % 100);
-        return string(buffer);
+        return std::string(buffer);
     } else if (format == "yyy") {
         char buffer[5];
         snprintf(buffer, 5, "%03d", year);
-        return string(buffer);
+        return std::string(buffer);
     } else if (format == "yyyy") {
         char buffer[5];
         snprintf(buffer, 5, "%04d", year);
-        return string(buffer);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format
@@ -156,7 +155,7 @@ string Formatter::year(const Date &date, string format) {
 }
 
 
-string Formatter::century(const Date &date, string format) {
+std::string Formatter::century(const Date &date, std::string format) {
     int century = date.year() / 100;
 
     // Return formatted century string
@@ -165,7 +164,7 @@ string Formatter::century(const Date &date, string format) {
     } else if (format == "cc") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", century % 100);
-        return string(buffer);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format
@@ -173,7 +172,7 @@ string Formatter::century(const Date &date, string format) {
 }
 
 
-string Formatter::hour(const Date &date, string format) {
+std::string Formatter::hour(const Date &date, std::string format) {
     int hour24 = date.hour();
     int hour12 = (hour24) ? hour24 % 12 : 12;
 
@@ -183,13 +182,13 @@ string Formatter::hour(const Date &date, string format) {
     } else if (format == "hh") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", hour12);
-        return string(buffer);
+        return std::string(buffer);
     } else if (format == "H") {
         return std::to_string(hour24);
     } else if (format == "HH") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", hour24);
-        return string(buffer);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format
@@ -197,7 +196,7 @@ string Formatter::hour(const Date &date, string format) {
 }
 
 
-string Formatter::minute(const Date &date, string format) {
+std::string Formatter::minute(const Date &date, std::string format) {
     int minute = date.minute();
 
     // Return formatted minute string
@@ -206,7 +205,7 @@ string Formatter::minute(const Date &date, string format) {
     } else if (format == "mm") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", minute);
-        return string(buffer);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format
@@ -214,7 +213,7 @@ string Formatter::minute(const Date &date, string format) {
 }
 
 
-string Formatter::second(const Date &date, string format) {
+std::string Formatter::second(const Date &date, std::string format) {
     int second = date.second();
 
     // Return formatted second string
@@ -223,7 +222,7 @@ string Formatter::second(const Date &date, string format) {
     } else if (format == "ss") {
         char buffer[3];
         snprintf(buffer, 3, "%02d", second);
-        return string(buffer);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format
@@ -231,8 +230,8 @@ string Formatter::second(const Date &date, string format) {
 }
 
 
-string Formatter::period(const Date &date, string format) {
-    string period = (date.hour() < 12) ? "am" : "pm";
+std::string Formatter::period(const Date &date, std::string format) {
+    std::string period = (date.hour() < 12) ? "am" : "pm";
 
     // Return formatted period string
     if (format == "t") {
@@ -254,18 +253,18 @@ string Formatter::period(const Date &date, string format) {
 }
 
 
-string Formatter::tz(const Date &date, string format) {
-    int tz = date.timezone();
+std::string Formatter::timezone(const Date &date, std::string format) {
+    int timezone = date.timezone();
 
-    // Return formatted tz string
+    // Return formatted timezone string
     if (format == "z") {
         char buffer[4];
-        snprintf(buffer, 4, "%+d", tz);
-        return string(buffer);
+        snprintf(buffer, 4, "%+d", timezone);
+        return std::string(buffer);
     } else if (format == "zz") {
         char buffer[4];
-        snprintf(buffer, 4, "%+02i", tz);
-        return string(buffer);
+        snprintf(buffer, 4, "%+02i", timezone);
+        return std::string(buffer);
     }
 
     // Return empty string for invalid format

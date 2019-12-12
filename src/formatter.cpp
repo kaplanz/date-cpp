@@ -29,21 +29,30 @@ std::string specifiers[] = {
 
 
 // -- Public Methods --
+// Format a Date object by the default string specifier
+std::string Formatter::format(const Date &date) {
+    // Use default format string specifier
+    const std::string formatStr = "H:mm:ss dd/MM/yyyy";
+
+    // Format on default string specifier
+    return Formatter::format(date, formatStr);
+}
+
+
 
 // Format a Date object by a string specifier
-std::string Formatter::format(const Date &date) {
-    // Extract format string specifier
-    std::string repl = "H:mm:ss dd/MM/yyyy"; // date.format;
+std::string Formatter::format(const Date &date, const std::string formatStr) {
+    std::string formatOut = formatStr;
 
     for (auto &s: specifiers) {
-        repl = std::regex_replace(
-                repl,
+        formatOut = std::regex_replace(
+                formatOut,
                 std::regex(s),
                 Formatter::substitute(date, s)
         );
     }
 
-    return repl;
+    return formatOut;
 }
 
 

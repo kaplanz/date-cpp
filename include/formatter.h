@@ -62,4 +62,5 @@ class Formatter {
 
     public:
         static std::string format(const Date &date);
+        static std::string format(const Date &date, std::string formatStr);
 };

@@ -22,22 +22,11 @@ Date::Date() {
 }
 
 
-// Copy constructor
-Date::Date(Date &date) {
-    this->epochSeconds = date.epochSeconds;
-    this->tz = date.tz;
-}
-
-
 // epochSeconds constructor
 Date::Date(long epochSeconds) {
     this->epochSeconds = epochSeconds;
     this->tz = 0;
 }
-
-
-// -- Destructor --
-Date::~Date() {}
 
 
 // -- Accessors --
@@ -116,15 +105,6 @@ bool Date::DST(const bool DST) {
 
 
 //  -- Operators --
-// Overload for operator=
-Date &Date::operator=(const Date &rhs) {
-    this->epochSeconds = rhs.epochSeconds;
-    this->tz = rhs.tz;
-
-    return *this;
-}
-
-
 // Overload for operator<
 bool Date::operator<(const Date &rhs) const {
     return this->epochSeconds < rhs.epochSeconds;

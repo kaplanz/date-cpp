@@ -23,11 +23,11 @@ class Date {
     public:
         // Constructors
         Date();
-        Date(Date &date);
+        Date(Date &date) = default;
         Date(long epochSeconds);
 
         // Destructor
-        ~Date();
+        ~Date() = default;
 
         // Accessors
         long epoch() const;
@@ -46,7 +46,7 @@ class Date {
         bool DST(const bool DST);
 
         // Operators
-        Date &operator=(const Date &rhs);
+        Date &operator=(const Date &rhs) = default;
         bool operator<(const Date &rhs) const;
         bool operator<=(const Date &rhs) const;
         bool operator==(const Date &rhs) const;

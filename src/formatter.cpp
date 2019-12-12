@@ -14,18 +14,19 @@
 #include "formatter.h"
 
 
-// -- Globals --
-const std::string dayName[] = {
+// -- Constants --
+const std::string Formatter::WEEKDAYS[] = {
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 };
-const std::string monthName[] = {
+const std::string Formatter::MONTHS[] = {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 };
-std::string specifiers[] = {
+const std::string Formatter::SPECIFIERS[] = {
     "dd", "d", "MMMM", "MMM", "MM", "M", "yyyy", "yyy", "yy", "y", "cc", "c",
     "hh", "h", "HH", "H", "mm", "m", "ss", "s", "tt", "t", "TT", "T", "zz", "z"
 };
+
 
 
 // -- Public Methods --
@@ -44,7 +45,7 @@ std::string Formatter::format(const Date &date) {
 std::string Formatter::format(const Date &date, const std::string formatStr) {
     std::string formatOut = formatStr;
 
-    for (auto &s: specifiers) {
+    for (auto &s: Formatter::SPECIFIERS) {
         formatOut = std::regex_replace(
                 formatOut,
                 std::regex(s),
@@ -108,9 +109,9 @@ std::string Formatter::day(const Date &date, std::string format) {
         snprintf(buffer, 3, "%02d", day);
         return std::string(buffer);
     } else if (format == "ddd") {
-        return std::string(dayName[day-1], 0, 3);
+        return std::string(Formatter::WEEKDAYS[day-1], 0, 3);
     } else if (format == "dddd") {
-        return std::string(dayName[day-1]);
+        return std::string(Formatter::WEEKDAYS[day-1]);
     }
 
     // Return empty string for invalid format
@@ -129,9 +130,9 @@ std::string Formatter::month(const Date &date, std::string format) {
         snprintf(buffer, 3, "%02d", month);
         return std::string(buffer);
     } else if (format == "MMM") {
-        return std::string(monthName[month-1], 0, 3);
+        return std::string(Formatter::MONTHS[month-1], 0, 3);
     } else if (format == "MMMM") {
-        return std::string(monthName[month-1]);
+        return std::string(Formatter::MONTHS[month-1]);
     }
 
     // Return empty string for invalid format

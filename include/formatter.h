@@ -45,6 +45,11 @@
 
 class Formatter {
     private:
+        // Constants
+        const static std::string WEEKDAYS[];
+        const static std::string MONTHS[];
+        const static std::string SPECIFIERS[];
+
         // Helper methods
         static std::string substitute(const Date &date, std::string format);
 

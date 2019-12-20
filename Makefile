@@ -12,6 +12,10 @@ OBJ ?= $(BUILD)/obj
 # Target executable
 TARGET ?= $(BUILD)/$(shell basename $(PWD))
 
+# Shell commands
+MKDIR = mkdir -p
+RM = rm -rfv
+
 # Inputs
 SRCS := $(wildcard $(SRC)/*.cpp)
 OBJS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
@@ -26,13 +30,13 @@ $(TARGET): $(OBJS)
 	$(CXX) -o $@ $^
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	@mkdir -p $(OBJ)
+	@$(MKDIR) $(OBJ)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 # Clean
 .PHONY: clean
 clean:
-	@rm -rfv $(TARGET) $(OBJS)
+	@$(RM) $(TARGET) $(OBJS)
 
 # Run
 .PHONY: run

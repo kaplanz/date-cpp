@@ -59,6 +59,77 @@ long Duration::seconds() const {
 }
 
 
+// -- Mutators --
+void Duration::addYears(int years) {
+    this->durationSeconds += years * (86400 * 365);
+}
+
+
+void Duration::setYears(int years) {
+    this->durationSeconds = years * (86400 * 365);
+}
+
+
+void Duration::addMonths(int months) {
+    this->durationSeconds += months * (86400 * 365 / 12);
+}
+
+
+void Duration::setMonths(int months) {
+    this->durationSeconds = months * (86400 * 365 / 12);
+}
+
+
+void Duration::addWeeks(int weeks) {
+    this->durationSeconds += weeks * (86400 * 7);
+}
+
+
+void Duration::setWeeks(int weeks) {
+    this->durationSeconds = weeks * (86400 * 7);
+}
+
+
+void Duration::addDays(int days) {
+    this->durationSeconds += days * 86400;
+}
+
+
+void Duration::setDays(int days) {
+    this->durationSeconds = days * 86400;
+}
+
+
+void Duration::addHours(int hours) {
+    this->durationSeconds += hours * 3600;
+}
+
+
+void Duration::setHours(int hours) {
+    this->durationSeconds = hours * 3600;
+}
+
+
+void Duration::addMinutes(int minutes) {
+    this->durationSeconds += minutes * 60;
+}
+
+
+void Duration::setMinutes(int minutes) {
+    this->durationSeconds = minutes * 60;
+}
+
+
+void Duration::addSeconds(long seconds) {
+    this->durationSeconds += seconds;
+}
+
+
+void Duration::setSeconds(long seconds) {
+    this->durationSeconds = seconds;
+}
+
+
 // -- Operators --
 // Overload for operator+
 Duration Duration::operator+(const Duration &rhs) const {

@@ -25,13 +25,29 @@ class Duration {
         ~Duration() = default;
 
         // Accessors
-        int years() const;
-        int months() const;
+        int years() const; // average years
+        int months() const; // average months
         int weeks() const;
         int days() const;
         int hours() const;
         int minutes() const;
         long seconds() const;
+
+        // Mutators
+        void addYears(int years); // average years
+        void setYears(int years); // average years
+        void addMonths(int months); // average months
+        void setMonths(int months); // average months
+        void addWeeks(int weeks);
+        void setWeeks(int weeks);
+        void addDays(int days);
+        void setDays(int days);
+        void addHours(int hours);
+        void setHours(int hours);
+        void addMinutes(int minutes);
+        void setMinutes(int minutes);
+        void addSeconds(long seconds);
+        void setSeconds(long seconds);
 
         // Operators
         Duration &operator=(const Duration &rhs) = default;

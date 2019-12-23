@@ -58,9 +58,10 @@ class Duration {
         friend Duration operator*(const double &lhs, const Duration &rhs);
         Duration operator/(const double &rhs) const;
         friend Duration operator/(const double &lhs, const Duration &rhs);
+        bool operator==(const Duration &rhs) const;
+        bool operator!=(const Duration &rhs) const;
         bool operator<(const Duration &rhs) const;
         bool operator<=(const Duration &rhs) const;
-        bool operator==(const Duration &rhs) const;
         bool operator>=(const Duration &rhs) const;
         bool operator>(const Duration &rhs) const;
 };

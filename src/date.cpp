@@ -120,6 +120,18 @@ Duration Date::operator-(const Date &rhs) const {
 }
 
 
+// Overload for operator==
+bool Date::operator==(const Date &rhs) const {
+    return this->epochSeconds == rhs.epochSeconds;
+}
+
+
+// Overload for operator!=
+bool Date::operator!=(const Date &rhs) const {
+    return this->epochSeconds != rhs.epochSeconds;
+}
+
+
 // Overload for operator<
 bool Date::operator<(const Date &rhs) const {
     return this->epochSeconds < rhs.epochSeconds;
@@ -129,12 +141,6 @@ bool Date::operator<(const Date &rhs) const {
 // Overload for operator<=
 bool Date::operator<=(const Date &rhs) const {
     return this->epochSeconds <= rhs.epochSeconds;
-}
-
-
-// Overload for operator==
-bool Date::operator==(const Date &rhs) const {
-    return this->epochSeconds == rhs.epochSeconds;
 }
 
 

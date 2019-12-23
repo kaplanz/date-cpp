@@ -161,6 +161,18 @@ Duration operator/(const double &lhs, const Duration &rhs) {
 }
 
 
+// Overload for operator==
+bool Duration::operator==(const Duration &rhs) const {
+    return this->durationSeconds == rhs.durationSeconds;
+}
+
+
+// Overload for operator!=
+bool Duration::operator!=(const Duration &rhs) const {
+    return this->durationSeconds != rhs.durationSeconds;
+}
+
+
 // Overload for operator<
 bool Duration::operator<(const Duration &rhs) const {
     return this->durationSeconds < rhs.durationSeconds;
@@ -170,12 +182,6 @@ bool Duration::operator<(const Duration &rhs) const {
 // Overload for operator<=
 bool Duration::operator<=(const Duration &rhs) const {
     return this->durationSeconds <= rhs.durationSeconds;
-}
-
-
-// Overload for operator==
-bool Duration::operator==(const Duration &rhs) const {
-    return this->durationSeconds == rhs.durationSeconds;
 }
 
 

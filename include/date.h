@@ -53,9 +53,10 @@ class Date {
         Date &operator=(const Date &rhs) = default;
         Date operator+(const Duration &rhs) const;
         Duration operator-(const Date &rhs) const;
+        bool operator==(const Date &rhs) const;
+        bool operator!=(const Date &rhs) const;
         bool operator<(const Date &rhs) const;
         bool operator<=(const Date &rhs) const;
-        bool operator==(const Date &rhs) const;
         bool operator>=(const Date &rhs) const;
         bool operator>(const Date &rhs) const;
         friend std::ostream &operator<<(std::ostream &lhs, const Date &rhs);

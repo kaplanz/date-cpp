@@ -11,6 +11,7 @@
 #include <string>
 
 #include "date.h"
+#include "duration.h"
 #include "formatter.h"
 
 
@@ -82,7 +83,7 @@ int Date::second() const {
 }
 
 
-// Mutators
+// -- Mutators --
 long Date::epoch(long epochSeconds) {
     return this->epochSeconds = epochSeconds;
 }
@@ -104,7 +105,21 @@ bool Date::DST(const bool DST) {
 }
 
 
-//  -- Operators --
+// -- Operators --
+// Overload for operator+
+Date Date::operator+(const Duration &rhs) const {
+    Date sum(*this);
+    sum.epochSeconds += rhs.durationSeconds;
+    return sum;
+}
+
+
+// Overload for operator-
+Duration Date::operator-(const Date &rhs) const {
+    return Duration(this->epochSeconds - rhs.epochSeconds);
+}
+
+
 // Overload for operator<
 bool Date::operator<(const Date &rhs) const {
     return this->epochSeconds < rhs.epochSeconds;
@@ -136,7 +151,7 @@ bool Date::operator>(const Date &rhs) const {
 
 
 // Overload for operator<<
-std::ostream &operator<<(std::ostream &lhs, Date &rhs) {
+std::ostream &operator<<(std::ostream &lhs, const Date &rhs) {
     // Redirect formatted date string to ostream, and return ostream
     return lhs << Formatter::format(rhs);
 }

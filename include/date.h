@@ -11,6 +11,10 @@
 #include <iostream>
 #include <string>
 
+// Forward declarations
+class Duration;
+class Formatter;
+
 
 class Date {
     friend class Formatter;
@@ -23,7 +27,7 @@ class Date {
     public:
         // Constructors
         Date();
-        Date(Date &date) = default;
+        Date(const Date &date) = default;
         Date(long epochSeconds);
 
         // Destructor
@@ -47,10 +51,12 @@ class Date {
 
         // Operators
         Date &operator=(const Date &rhs) = default;
+        Date operator+(const Duration &rhs) const;
+        Duration operator-(const Date &rhs) const;
         bool operator<(const Date &rhs) const;
         bool operator<=(const Date &rhs) const;
         bool operator==(const Date &rhs) const;
         bool operator>=(const Date &rhs) const;
         bool operator>(const Date &rhs) const;
-        friend std::ostream &operator<<(std::ostream &lhs, Date &rhs);
+        friend std::ostream &operator<<(std::ostream &lhs, const Date &rhs);
 };

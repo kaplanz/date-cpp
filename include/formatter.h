@@ -9,12 +9,15 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "date.h"
 
 //  -- Date Formatting Table --
 //  d       day     1       31
 //  dd      day     01      31
+//  ddd     day     Sun     Sat
+//  dddd    day     Sunday  Saturday
 //  M       month   1       12
 //  MM      month   01      12
 //  MMM     month   Jan     Dec
@@ -29,8 +32,8 @@
 //  -- Time Formatting Table --
 //  h       hour    0       12
 //  hh      hour    00      12
-//  H       hour    1       12
-//  HH      hour    01      12
+//  H       hour    1       24
+//  HH      hour    01      24
 //  m       minute  0       59
 //  mm      minute  00      59
 //  s       second  0       59
@@ -48,9 +51,9 @@ class Formatter {
         // Constants
         const static std::string WEEKDAYS[];
         const static std::string MONTHS[];
-        const static std::string SPECIFIERS[];
 
         // Helper methods
+        static void tokenize(const std::string src, std::vector<std::string> &tokens);
         static std::string substitute(const Date &date, std::string format);
 
         // Date formatting
@@ -67,5 +70,5 @@ class Formatter {
 
     public:
         static std::string format(const Date &date);
-        static std::string format(const Date &date, std::string formatStr);
+        static std::string format(const Date &date, std::string specifier);
 };

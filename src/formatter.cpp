@@ -7,8 +7,8 @@
 //
 
 #include <cstdio>
-#include <regex>
 #include <string>
+#include <vector>
 
 #include "date.h"
 #include "formatter.h"
@@ -22,42 +22,52 @@ const std::string Formatter::MONTHS[] = {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 };
-const std::string Formatter::SPECIFIERS[] = {
-    "dd", "d", "MMMM", "MMM", "MM", "M", "yyyy", "yyy", "yy", "y", "cc", "c",
-    "hh", "h", "HH", "H", "mm", "m", "ss", "s", "tt", "t", "TT", "T", "zz", "z"
-};
-
 
 
 // -- Public Methods --
 // Format a Date object by the default string specifier
 std::string Formatter::format(const Date &date) {
     // Use default format string specifier
-    const std::string formatStr = "H:mm:ss dd/MM/yyyy";
+    const std::string specifier = "ddd dd MMM yyyy H:mm:ss z";
 
     // Format on default string specifier
-    return Formatter::format(date, formatStr);
+    return Formatter::format(date, specifier);
 }
 
 
-
 // Format a Date object by a string specifier
-std::string Formatter::format(const Date &date, const std::string formatStr) {
-    std::string formatOut = formatStr;
+std::string Formatter::format(const Date &date, const std::string specifier) {
+    // Tokenize string specifier
+    std::vector<std::string> tokens;
+    tokenize(specifier, tokens);
 
-    for (auto &s: Formatter::SPECIFIERS) {
-        formatOut = std::regex_replace(
-                formatOut,
-                std::regex(s),
-                Formatter::substitute(date, s)
-        );
+    // Build formatted string
+    std::string formatted;
+    for (auto &t: tokens) {
+        formatted += Formatter::substitute(date, t);
     }
 
-    return formatOut;
+    return formatted;
 }
 
 
 // -- Private Methods --
+
+// Tokenize a string specifier
+void Formatter::tokenize(const std::string src, std::vector<std::string> &tokens) {
+    std::string token;
+
+    for (auto c: src) {
+        if (!token.back() || c == token.back())
+            token += c;
+        else {
+            tokens.push_back(token);
+            token = "";
+            token += c;
+        }
+    }
+}
+
 
 // Perform appropriate format substitution
 std::string Formatter::substitute(const Date &date, std::string format) {
@@ -109,9 +119,9 @@ std::string Formatter::day(const Date &date, std::string format) {
         snprintf(buffer, 3, "%02d", day);
         return std::string(buffer);
     } else if (format == "ddd") {
-        return std::string(Formatter::WEEKDAYS[day-1], 0, 3);
+        return std::string(Formatter::WEEKDAYS[(day-1) % 7], 0, 3);
     } else if (format == "dddd") {
-        return std::string(Formatter::WEEKDAYS[day-1]);
+        return std::string(Formatter::WEEKDAYS[(day-1) % 7]);
     }
 
     // Return empty string for invalid format

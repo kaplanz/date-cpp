@@ -24,6 +24,21 @@ Duration::Duration(long durationSeconds) {
 
 
 // -- Accessors --
+int Duration::years() const {
+    return this->durationSeconds / (86400 * 365); // average years
+}
+
+
+int Duration::months() const {
+    return this->durationSeconds / (86400 * 365 / 12); // average months
+}
+
+
+int Duration::weeks() const {
+    return this->durationSeconds / (86400 * 7);
+}
+
+
 int Duration::days() const {
     return this->durationSeconds / 86400;
 }

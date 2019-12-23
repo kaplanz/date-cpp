@@ -25,6 +25,9 @@ class Duration {
         ~Duration() = default;
 
         // Accessors
+        int years() const;
+        int months() const;
+        int weeks() const;
         int days() const;
         int hours() const;
         int minutes() const;

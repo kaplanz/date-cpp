@@ -1,3 +1,4 @@
+# -- Directories --
 # Root directory
 ROOT ?= .
 
@@ -9,36 +10,47 @@ SRC ?= $(ROOT)/src
 BUILD ?= $(ROOT)/build
 OBJ ?= $(BUILD)/obj
 
-# Target executable
-TARGET ?= $(BUILD)/$(shell basename $(PWD))
 
-# Shell commands
+# -- Files --
+# Prerequisites
+SRCS := $(wildcard $(SRC)/*.cpp)
+OBJS := $(SRCS:$(SRC)/%.cpp=$(OBJ)/%.o)
+INCLUDES := $(addprefix -I,$(INCLUDE))
+
+# Targets
+TARGET ?= $(BUILD)/$(shell basename "$(CURDIR)")
+
+
+# -- Commands --
+# Shell
 MKDIR = mkdir -p
 RM = rm -rfv
 
-# Inputs
-SRCS := $(wildcard $(SRC)/*.cpp)
-OBJS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
-INCLUDES := $(addprefix -I,$(INCLUDE))
-
 # Compiler
-CXX ?= g++
-CXXFLAGS ?= -Wall -g -std=c++17 $(INCLUDES)
+CXX = c++
+CXXFLAGS = -Wall -g -std=c++17 $(INCLUDES)
 
-# Build
+
+# -- Recipies --
+.PHONY: all
+all: $(TARGET)
+
+# Build target executable
 $(TARGET): $(OBJS)
 	$(CXX) -o $@ $^
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	@$(MKDIR) $(OBJ)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean
-.PHONY: clean
-clean:
-	@$(RM) $(TARGET) $(OBJS)
 
-# Run
+# Run target executable
 .PHONY: run
 run: $(TARGET)
 	@$(TARGET)
+
+
+# Clean project directory
+.PHONY: clean
+clean:
+	@$(RM) $(BUILD)

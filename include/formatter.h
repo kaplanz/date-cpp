@@ -45,30 +45,29 @@
 //  z       tz      +0      +12
 //  zz      tz      +00     +12
 
-
 class Formatter {
-    private:
-        // Constants
-        const static std::string WEEKDAYS[];
-        const static std::string MONTHS[];
+private:
+    // Constants
+    const static std::string WEEKDAYS[];
+    const static std::string MONTHS[];
 
-        // Helper methods
-        static void tokenize(const std::string src, std::vector<std::string> &tokens);
-        static std::string substitute(const Date &date, std::string format);
+    // Helper methods
+    static void tokenize(const std::string src, std::vector<std::string> &tokens);
+    static std::string substitute(const Date &date, std::string format);
 
-        // Date formatting
-        static std::string day(const Date &date, std::string format);
-        static std::string month(const Date &date, std::string format);
-        static std::string year(const Date &date, std::string format);
-        static std::string century(const Date &date, std::string format);
-        // Time formatting
-        static std::string hour(const Date &date, std::string format);
-        static std::string minute(const Date &date, std::string format);
-        static std::string second(const Date &date, std::string format);
-        static std::string period(const Date &date, std::string format);
-        static std::string timezone(const Date &date, std::string format);
+    // Date formatting
+    static std::string day(const Date &date, std::string format);
+    static std::string month(const Date &date, std::string format);
+    static std::string year(const Date &date, std::string format);
+    static std::string century(const Date &date, std::string format);
+    // Time formatting
+    static std::string hour(const Date &date, std::string format);
+    static std::string minute(const Date &date, std::string format);
+    static std::string second(const Date &date, std::string format);
+    static std::string period(const Date &date, std::string format);
+    static std::string timezone(const Date &date, std::string format);
 
-    public:
-        static std::string format(const Date &date);
-        static std::string format(const Date &date, std::string specifier);
+public:
+    static std::string format(const Date &date);
+    static std::string format(const Date &date, std::string specifier);
 };

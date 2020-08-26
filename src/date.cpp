@@ -6,11 +6,12 @@
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 //
 
+#include "date.h"
+
 #include <ctime>
 #include <iostream>
 #include <string>
 
-#include "date.h"
 #include "duration.h"
 #include "formatter.h"
 
@@ -21,7 +22,6 @@ Date::Date() {
     this->epochSeconds = 0;
     this->tz = 0;
 }
-
 
 // epochSeconds constructor
 Date::Date(long epochSeconds) {
@@ -35,47 +35,39 @@ long Date::epoch() const {
     return this->epochSeconds;
 }
 
-
 int Date::timezone() const {
     int sign = (this->tz & 0x40) ? -1 : 1;
     return sign * (this->tz & 0x0F);
 }
 
-
 bool Date::DST() const {
     return this->tz & 0x80;
 }
-
 
 int Date::year() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
     return std::gmtime(&offset)->tm_year + 1900;
 }
 
-
 int Date::month() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
     return std::gmtime(&offset)->tm_mon + 1;
 }
-
 
 int Date::day() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
     return std::gmtime(&offset)->tm_mday;
 }
 
-
 int Date::hour() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
     return std::gmtime(&offset)->tm_hour;
 }
 
-
 int Date::minute() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
     return std::gmtime(&offset)->tm_min;
 }
-
 
 int Date::second() const {
     long offset = this->epochSeconds + 3600 * (this->timezone() + this->DST());
@@ -88,7 +80,6 @@ long Date::epoch(long epochSeconds) {
     return this->epochSeconds = epochSeconds;
 }
 
-
 int Date::timezone(const int tz) {
     // Store sign in bit 7, value in lower 6 bits
     char sign = (tz < 0) ? -1 : 1;
@@ -97,7 +88,6 @@ int Date::timezone(const int tz) {
 
     return this->timezone();
 }
-
 
 bool Date::DST(const bool DST) {
     // Store DST indicator in bit 8
@@ -113,48 +103,40 @@ Date Date::operator+(const Duration &rhs) const {
     return sum;
 }
 
-
 // Overload for operator-
 Duration Date::operator-(const Date &rhs) const {
     return Duration(this->epochSeconds - rhs.epochSeconds);
 }
-
 
 // Overload for operator==
 bool Date::operator==(const Date &rhs) const {
     return this->epochSeconds == rhs.epochSeconds;
 }
 
-
 // Overload for operator!=
 bool Date::operator!=(const Date &rhs) const {
     return this->epochSeconds != rhs.epochSeconds;
 }
-
 
 // Overload for operator<
 bool Date::operator<(const Date &rhs) const {
     return this->epochSeconds < rhs.epochSeconds;
 }
 
-
 // Overload for operator<=
 bool Date::operator<=(const Date &rhs) const {
     return this->epochSeconds <= rhs.epochSeconds;
 }
-
 
 // Overload for operator>=
 bool Date::operator>=(const Date &rhs) const {
     return this->epochSeconds >= rhs.epochSeconds;
 }
 
-
 // Overload for operator>
 bool Date::operator>(const Date &rhs) const {
     return this->epochSeconds > rhs.epochSeconds;
 }
-
 
 // Overload for operator<<
 std::ostream &operator<<(std::ostream &lhs, const Date &rhs) {

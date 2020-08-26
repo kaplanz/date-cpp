@@ -6,21 +6,38 @@
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 //
 
+#include "formatter.h"
+
 #include <cstdio>
 #include <string>
 #include <vector>
 
 #include "date.h"
-#include "formatter.h"
 
 
 // -- Constants --
 const std::string Formatter::WEEKDAYS[] = {
-    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
 };
 const std::string Formatter::MONTHS[] = {
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 };
 
 
@@ -34,7 +51,6 @@ std::string Formatter::format(const Date &date) {
     return Formatter::format(date, specifier);
 }
 
-
 // Format a Date object by a string specifier
 std::string Formatter::format(const Date &date, const std::string specifier) {
     // Tokenize string specifier
@@ -43,7 +59,7 @@ std::string Formatter::format(const Date &date, const std::string specifier) {
 
     // Build formatted string
     std::string formatted;
-    for (auto &t: tokens) {
+    for (auto &t : tokens) {
         formatted += Formatter::substitute(date, t);
     }
 
@@ -56,7 +72,7 @@ std::string Formatter::format(const Date &date, const std::string specifier) {
 void Formatter::tokenize(const std::string src, std::vector<std::string> &tokens) {
     std::string token;
 
-    for (auto c: src) {
+    for (auto c : src) {
         if (!token.back() || c == token.back())
             token += c;
         else {
@@ -66,7 +82,6 @@ void Formatter::tokenize(const std::string src, std::vector<std::string> &tokens
         }
     }
 }
-
 
 // Perform appropriate format substitution
 std::string Formatter::substitute(const Date &date, std::string format) {
@@ -105,7 +120,6 @@ std::string Formatter::substitute(const Date &date, std::string format) {
     }
 }
 
-
 // Formatting
 std::string Formatter::day(const Date &date, std::string format) {
     int day = date.day();
@@ -118,15 +132,14 @@ std::string Formatter::day(const Date &date, std::string format) {
         snprintf(buffer, 3, "%02d", day);
         return std::string(buffer);
     } else if (format == "ddd") {
-        return std::string(Formatter::WEEKDAYS[(day-1) % 7], 0, 3);
+        return std::string(Formatter::WEEKDAYS[(day - 1) % 7], 0, 3);
     } else if (format == "dddd") {
-        return std::string(Formatter::WEEKDAYS[(day-1) % 7]);
+        return std::string(Formatter::WEEKDAYS[(day - 1) % 7]);
     }
 
     // Return empty string for invalid format
     return format;
 }
-
 
 std::string Formatter::month(const Date &date, std::string format) {
     int month = date.month();
@@ -139,15 +152,14 @@ std::string Formatter::month(const Date &date, std::string format) {
         snprintf(buffer, 3, "%02d", month);
         return std::string(buffer);
     } else if (format == "MMM") {
-        return std::string(Formatter::MONTHS[month-1], 0, 3);
+        return std::string(Formatter::MONTHS[month - 1], 0, 3);
     } else if (format == "MMMM") {
-        return std::string(Formatter::MONTHS[month-1]);
+        return std::string(Formatter::MONTHS[month - 1]);
     }
 
     // Return empty string for invalid format
     return format;
 }
-
 
 std::string Formatter::year(const Date &date, std::string format) {
     int year = date.year();
@@ -173,7 +185,6 @@ std::string Formatter::year(const Date &date, std::string format) {
     return format;
 }
 
-
 std::string Formatter::century(const Date &date, std::string format) {
     int century = date.year() / 100;
 
@@ -189,7 +200,6 @@ std::string Formatter::century(const Date &date, std::string format) {
     // Return empty string for invalid format
     return format;
 }
-
 
 std::string Formatter::hour(const Date &date, std::string format) {
     int hour24 = date.hour();
@@ -214,7 +224,6 @@ std::string Formatter::hour(const Date &date, std::string format) {
     return format;
 }
 
-
 std::string Formatter::minute(const Date &date, std::string format) {
     int minute = date.minute();
 
@@ -230,7 +239,6 @@ std::string Formatter::minute(const Date &date, std::string format) {
     // Return empty string for invalid format
     return format;
 }
-
 
 std::string Formatter::second(const Date &date, std::string format) {
     int second = date.second();
@@ -248,7 +256,6 @@ std::string Formatter::second(const Date &date, std::string format) {
     return format;
 }
 
-
 std::string Formatter::period(const Date &date, std::string format) {
     std::string period = (date.hour() < 12) ? "am" : "pm";
 
@@ -258,11 +265,11 @@ std::string Formatter::period(const Date &date, std::string format) {
     } else if (format == "tt") {
         return period;
     } else if (format == "T") {
-        for (auto &c: period)
+        for (auto &c : period)
             c = toupper(c); // to upper case
         return period.substr(0, 1);
     } else if (format == "TT") {
-        for (auto &c: period)
+        for (auto &c : period)
             c = toupper(c); // to upper case
         return period;
     }

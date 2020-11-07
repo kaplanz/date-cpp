@@ -31,9 +31,9 @@
 *.out
 *.app
 
-# Build directory
-/build/
+# Build directories
+bin/
+build/
 
-# Main file
-main.c
-main.cpp
+# Tag index files
+tags

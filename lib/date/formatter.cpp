@@ -6,13 +6,13 @@
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 //
 
-#include "formatter.h"
+#include "date/formatter.h"
 
 #include <cstdio>
 #include <string>
 #include <vector>
 
-#include "date.h"
+#include "date/date.h"
 
 
 // -- Constants --

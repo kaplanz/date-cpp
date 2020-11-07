@@ -6,9 +6,9 @@
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 //
 
-#include "duration.h"
+#include "date/duration.h"
 
-#include "date.h"
+#include "date/date.h"
 
 
 // -- Constructors --

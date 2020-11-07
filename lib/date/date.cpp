@@ -6,14 +6,14 @@
 //  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 //
 
-#include "date.h"
+#include "date/date.h"
 
 #include <ctime>
 #include <iostream>
 #include <string>
 
-#include "duration.h"
-#include "formatter.h"
+#include "date/duration.h"
+#include "date/formatter.h"
 
 
 // -- Constructors --

@@ -10,7 +10,6 @@
 
 #include "date/date.h"
 
-
 // -- Constructors --
 // Default constructor
 Duration::Duration() {
@@ -21,7 +20,6 @@ Duration::Duration() {
 Duration::Duration(long durationSeconds) {
     this->durationSeconds = durationSeconds;
 }
-
 
 // -- Accessors --
 int Duration::years() const {
@@ -51,7 +49,6 @@ int Duration::minutes() const {
 long Duration::seconds() const {
     return this->durationSeconds;
 }
-
 
 // -- Mutators --
 void Duration::addYears(int years) {
@@ -109,7 +106,6 @@ void Duration::addSeconds(long seconds) {
 void Duration::setSeconds(long seconds) {
     this->durationSeconds = seconds;
 }
-
 
 // -- Operators --
 // Overload for operator+

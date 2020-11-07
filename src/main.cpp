@@ -13,7 +13,6 @@
 
 using namespace std;
 
-
 int main(int argc, char *argv[]) {
     // Create Date objects
     Date epoch;

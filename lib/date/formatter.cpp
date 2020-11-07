@@ -14,7 +14,6 @@
 
 #include "date/date.h"
 
-
 // -- Constants --
 const std::string Formatter::WEEKDAYS[] = {
     "Sunday",
@@ -39,7 +38,6 @@ const std::string Formatter::MONTHS[] = {
     "November",
     "December",
 };
-
 
 // -- Public Methods --
 // Format a Date object by the default string specifier
@@ -66,10 +64,10 @@ std::string Formatter::format(const Date &date, const std::string specifier) {
     return formatted;
 }
 
-
 // -- Private Methods --
 // Tokenize a string specifier
-void Formatter::tokenize(const std::string src, std::vector<std::string> &tokens) {
+void Formatter::tokenize(const std::string src,
+                         std::vector<std::string> &tokens) {
     std::string token;
 
     for (auto c : src) {
@@ -277,7 +275,6 @@ std::string Formatter::period(const Date &date, std::string format) {
     // Return empty string for invalid format
     return format;
 }
-
 
 std::string Formatter::timezone(const Date &date, std::string format) {
     int timezone = date.timezone();

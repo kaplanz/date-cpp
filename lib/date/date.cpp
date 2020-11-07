@@ -15,7 +15,6 @@
 #include "date/duration.h"
 #include "date/formatter.h"
 
-
 // -- Constructors --
 // Default constructor
 Date::Date() {
@@ -28,7 +27,6 @@ Date::Date(long epochSeconds) {
     this->epochSeconds = epochSeconds;
     this->tz = 0;
 }
-
 
 // -- Accessors --
 long Date::epoch() const {
@@ -74,7 +72,6 @@ int Date::second() const {
     return std::gmtime(&offset)->tm_sec;
 }
 
-
 // -- Mutators --
 long Date::epoch(long epochSeconds) {
     return this->epochSeconds = epochSeconds;
@@ -93,7 +90,6 @@ bool Date::DST(const bool DST) {
     // Store DST indicator in bit 8
     return this->tz = ((DST) ? 0x80 : 0x00) | (this->tz & 0x7F);
 }
-
 
 // -- Operators --
 // Overload for operator+

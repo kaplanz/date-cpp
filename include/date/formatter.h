@@ -1,10 +1,7 @@
-//
-//  formatter.h
-//  Date to string formatter header file.
-//
-//  Created by Zakhary Kaplan on 2019-12-03.
-//  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-//
+// File:        formatter.h
+// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Created:     03 Dec 2019
+// SPDX-License-Identifier: NONE
 
 #pragma once
 

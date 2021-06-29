@@ -1,10 +1,7 @@
-//
-//  duration.cpp
-//  Duration class implementation.
-//
-//  Created by Zakhary Kaplan on 2019-12-23.
-//  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-//
+// File:        duration.cpp
+// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Created:     23 Dec 2019
+// SPDX-License-Identifier: NONE
 
 #include "date/duration.h"
 

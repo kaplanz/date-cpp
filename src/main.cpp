@@ -1,10 +1,7 @@
-//
-//  main.cpp
-//  Program entry point.
-//
-//  Created by Zakhary Kaplan on 2019-01-01.
-//  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-//
+// File:        main.cpp
+// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Created:     01 Jan 2019
+// SPDX-License-Identifier: NONE
 
 #include <iostream>
 

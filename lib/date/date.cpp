@@ -1,10 +1,7 @@
-//
-//  date.cpp
-//  Date class implementation.
-//
-//  Created by Zakhary Kaplan on 2019-12-03.
-//  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-//
+// File:        date.cpp
+// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Created:     03 Dec 2019
+// SPDX-License-Identifier: NONE
 
 #include "date/date.h"
 

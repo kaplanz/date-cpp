@@ -1,10 +1,7 @@
-//
-//  formatter.cpp
-//  Date to string formatter.
-//
-//  Created by Zakhary Kaplan on 2019-12-03.
-//  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-//
+// File:        formatter.cpp
+// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Created:     03 Dec 2019
+// SPDX-License-Identifier: NONE
 
 #include "date/formatter.h"
 

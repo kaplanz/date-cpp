@@ -63,8 +63,7 @@ std::string Formatter::format(const Date &date, const std::string specifier) {
 
 // -- Private Methods --
 // Tokenize a string specifier
-void Formatter::tokenize(const std::string src,
-                         std::vector<std::string> &tokens) {
+void Formatter::tokenize(const std::string src, std::vector<std::string> &tokens) {
     std::string token;
 
     for (auto c : src) {

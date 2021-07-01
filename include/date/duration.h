@@ -22,7 +22,7 @@ public:
     ~Duration() = default;
 
     // Accessors
-    int years() const; // average years
+    int years() const;  // average years
     int months() const; // average months
     int weeks() const;
     int days() const;
@@ -31,8 +31,8 @@ public:
     long seconds() const;
 
     // Mutators
-    void addYears(int years); // average years
-    void setYears(int years); // average years
+    void addYears(int years);   // average years
+    void setYears(int years);   // average years
     void addMonths(int months); // average months
     void setMonths(int months); // average months
     void addWeeks(int weeks);

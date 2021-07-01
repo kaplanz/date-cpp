@@ -17,7 +17,7 @@ class Date {
 private:
     // Data members
     long epochSeconds; // epoch time in seconds
-    char tz; // DST and time zone info
+    char tz;           // DST and time zone info
 
 public:
     // Constructors

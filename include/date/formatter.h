@@ -49,8 +49,7 @@ private:
     const static std::string MONTHS[];
 
     // Helper methods
-    static void tokenize(const std::string src,
-                         std::vector<std::string> &tokens);
+    static void tokenize(const std::string src, std::vector<std::string> &tokens);
     static std::string substitute(const Date &date, std::string format);
 
     // Date formatting

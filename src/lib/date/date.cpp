@@ -1,5 +1,5 @@
 // File:        date.cpp
-// Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+// Author:      Zakhary Kaplan <https://zakhary.dev>
 // Created:     03 Dec 2019
 // SPDX-License-Identifier: NONE
 
